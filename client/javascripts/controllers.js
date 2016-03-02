@@ -34,19 +34,21 @@ angular.module('foodTruck')
         // need to send this address to google API that will turn it into long and
         var fullAddress = vm.address.addressLine + ', ' + vm.address.city + ' ' + vm.address.state + ', ' + vm.address.zipCode;
 
+
         // code to find long and lat based on user address
         function searchAddress() {
             console.log('INSIDE SEARCH ADDRESS!!');
             var geocoder = new google.maps.Geocoder();
             geocoder.geocode({address: fullAddress}, function(results, status) {
+                console.log('RESULTS', results);
+                var pos = 
                 if (status === google.maps.GeocoderStatus.OK) {
                     map.setCenter(results[0].geometry.location);
                     map.setZoom(17)
                 } else {
+                    console.log('STATUS', status);
                     alert('Something messed up! It was due to: ' + status);
                 }
-            console.log('STATUS', status);
-            console.log('RESULTS', results);
             })
         }
         console.log('FULL ADDRESS', fullAddress);
